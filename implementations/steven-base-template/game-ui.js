@@ -16,6 +16,11 @@ function GameUI(board, width, height, flags) {
         width: width,
         height: height,
         flags: flags,
+        engine: null,
+
+        setGameEngine: function(e) {
+            engine = e;
+        },
 
 
         /**
@@ -30,7 +35,15 @@ function GameUI(board, width, height, flags) {
             /////////////////////////////////////////
             // INTEGRATE WITH YOUR GAME CODE HERE
             /////////////////////////////////////////
+            selectedCell = engine.getCell(pos.x, pos.y);
 
+            if(selectedCell.isMine()) {
+                cell.find('.inner').addClass('flaticon-mine');
+                alert("you lose");
+            } else {
+                cell.find('.inner').addClass('uncovered');
+                cell.find('.inner').text( selectedCell.adjacentMineCount());
+            }
 
             //cell.find('.inner').addClass('uncovered');
             // or
@@ -51,7 +64,7 @@ function GameUI(board, width, height, flags) {
             /////////////////////////////////////////
 
 
-            //cell.find('.inner').addClass('flaticon-flag');
+            // cell.find('.inner').addClass('flaticon-flag');
         },
 
         /**

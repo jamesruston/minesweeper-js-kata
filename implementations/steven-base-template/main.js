@@ -33,6 +33,9 @@ $(document).ready(function () {
         })
 
 
+
+        var gameEngine = new GameEngine(width, height, mines);
+        ui.setGameEngine(gameEngine);
         ///////////////////////////////////////
         // INITIALISE YOUR GAME ENGINE HERE
         ///////////////////////////////////////
