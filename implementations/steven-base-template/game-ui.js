@@ -17,6 +17,7 @@ function GameUI(board, width, height, flags) {
         height: height,
         flags: flags,
         engine: null,
+        foundMines: 0,
 
         setGameEngine: function(e) {
             engine = e;
@@ -62,7 +63,19 @@ function GameUI(board, width, height, flags) {
             /////////////////////////////////////////
             // INTEGRATE WITH YOUR GAME CODE HERE
             /////////////////////////////////////////
-
+            selectedCell = engine.getCell(pos.x, pos.y);
+            if(flags > 0) {
+                flags--;
+                cell.find('.inner').addClass('flaticon-flag');
+                if(selectedCell.isMine()) {
+                    game_ui.foundMines++;
+                    console.log(game_ui.foundMines, engine.mineCount());
+                    if(game_ui.foundMines == engine.mineCount()) {
+                        alert("you win!");
+                    }
+                }
+            }
+    
 
             // cell.find('.inner').addClass('flaticon-flag');
         },
